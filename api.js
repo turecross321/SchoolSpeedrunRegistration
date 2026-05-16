@@ -1,6 +1,6 @@
 class ApiClient {
-  constructor() {
-    this.baseUrl = "http://192.168.1.135:5055/";
+  constructor(baseUrl) {
+    this.baseUrl = baseUrl;
   }
 
   valuateResponseSuccess(response) {

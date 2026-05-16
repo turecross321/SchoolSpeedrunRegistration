@@ -331,26 +331,28 @@ async function register(event) {
   }
 }
 
-async function getRegistration() {
+async function initialize() {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
+  const baseUrl = urlParams.get("api");
+
+  api = new ApiClient(baseUrl);
 
   try {
     const response = await api.getRegistration(id);
     currentRegistration = response.body;
     initializeRegistrationBasicInfoSubPage();
     goToRegistrationSubPage(registrationSubPages.basicInformationForm);
-    console.log("Hooray!");
   } catch (error) {
     goToRegistrationSubPage(registrationSubPages.invalidCode);
   }
 }
 
-const api = new ApiClient();
+let api;
 
 dom.basicInfoPage.form.addEventListener("submit", register);
 dom.pfpPage.useButton.addEventListener("click", useProfilePicture);
 dom.pfpPage.skipButton.addEventListener("click", skipProfilePicture);
 
 goToRegistrationSubPage(registrationSubPages.loading);
-getRegistration();
+initialize();
