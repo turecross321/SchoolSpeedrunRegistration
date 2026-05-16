@@ -2,7 +2,7 @@
 The registration page for SchoolSpeedrun.
 
 ## NOTE
-The code quality of this project is terrible. It was made with a very tight deadline, and was initially not even meant to be its own project. It's a mess.
+The code quality of this project is terrible. It was made with a very tight deadline and was initially not even meant to be its own project. It's a vibecoded stitched together mess.
 
 ## Photos
 <img height="500" alt="bild" src="https://github.com/user-attachments/assets/14cc8ef0-88bb-4848-b30d-4134d28424ef" />
