@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skolspeedrun | Registrering</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="registration">
+      <div id="registration-loading-page" hidden>
+        <p>Hämtar din registrering...</p>
+      </div>
+
+      <div id="registration-invalid-code-page" hidden>
+        <h2>Ogiltig kod</h2>
+        <p>
+          Den skannade koden är ogiltig. Vänligen försök att skanna ditt
+          passerkort igen och att sedan följa den nya QR-koden.
+        </p>
+      </div>
+
+      <div id="registrationBasicInfoPage" hidden>
+        <h2>Välkommen!</h2>
+        <p>
+          Ingen spelare har registrerats med det angivna kortet. Skapa ett konto
+          för att börja spela!
+        </p>
+
+        <br />
+
+        <form id="registerForm" submit="registerFormSubmit">
+          <div class="field">
+            <label for="registerUsername">Användarnamn</label>
+            <input
+              id="registerUsername"
+              type="text"
+              required
+              minlength="3"
+              maxlength="36"
+              pattern="[a-zA-ZåäöÅÄÖ0-9]{3,36}"
+              title="Användarnamnet måste vara 3-36 tecken och bara innehålla bokstäver och siffror."
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="field">
+            <label for="registerProgram">Kategori / Program</label>
+            <select id="registerProgram" required>
+              <option value="" selected disabled>Välj ett alternativ</option>
+
+              <optgroup label="Personal & Besökare">
+                <option value="0">Lärare</option>
+                <option value="1">Annan personal</option>
+                <option value="2">Besökare / Ej knuten till skolan</option>
+              </optgroup>
+
+              <optgroup label="Högskoleförberedande program">
+                <option value="3">Ekonomiprogrammet</option>
+                <option value="4">
+                  Estetiska programmet – Bild och formgivning
+                </option>
+                <option value="5">Estetiska programmet – Modedesign</option>
+                <option value="6">Estetiska programmet – Musik</option>
+                <option value="7">
+                  Estetiska programmet – Spetsutbildning (MUV)
+                </option>
+                <option value="8">Naturvetenskapsprogrammet</option>
+                <option value="9">Samhällsvetenskapsprogrammet</option>
+                <option value="10">Teknikprogrammet</option>
+              </optgroup>
+
+              <optgroup label="Yrkesprogram">
+                <option value="11">Barn- och fritidsprogrammet</option>
+                <option value="12">El- och energiprogrammet</option>
+                <option value="13">Fordons- och transportprogrammet</option>
+                <option value="14">Naturbruksprogrammet – Hästhållning</option>
+                <option value="15">Vård- och omsorgsprogrammet</option>
+              </optgroup>
+
+              <optgroup label="Övrigt">
+                <option value="16">Introduktionsprogrammen</option>
+                <option value="17">Gymnasial lärlingsutbildning</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>
+              <input type="checkbox" id="registerAgreeToTerms" required />
+              <span> Jag accepterar villkoren </span>
+            </label>
+
+            <details
+              id="registerTermsContent"
+              style="margin-top: 10px; font-size: 0.9rem; color: #444"
+            >
+              <summary style="cursor: pointer; color: #666">
+                Visa villkor (klicka för att läsa)
+              </summary>
+              <div
+                style="
+                  padding: 15px;
+                  border: 1px solid #eee;
+                  border-radius: 8px;
+                  background: #f9f9f9;
+                  margin-top: 5px;
+                "
+              >
+                <strong>Användarvillkor</strong>
+                <p>1. Spring inte inomhus i skolan. (👎👎👎)</p>
+                <p>2. Pilla inte sönder mina coola stationer.</p>
+                <p>
+                  3. Kontakta
+                  <a href="mailto:ture.publishing@gmail.com">mig via mail</a>
+                  om du vill radera ditt konto eller har några andra frågor.
+                </p>
+                <p>4. GDPR-blablabla</p>
+              </div>
+            </details>
+          </div>
+
+          <div style="display: flex; gap: 8px">
+            <button type="submit">Registrera</button>
+            <button type="button" id="registerCancel">Avbryt</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="registrationPfpPage" hidden>
+        <div class="gap">
+          <div>
+            <h2>Anpassa din profil</h2>
+            <p>Ladda upp en profilbild om du vill.</p>
+          </div>
+
+          <input
+            id="registration-pfp-input"
+            type="file"
+            accept="image/*"
+            capture="environment"
+            hidden
+          />
+
+          <div id="registration-pfp-photo-container">
+            <img
+              id="registration-pfp-photo"
+              src=""
+              alt="Förhandsgranskning av den valda bilden."
+              hidden
+            />
+            <label
+              class="registration-pfp-overlay-button"
+              id="registration-pfp-choose-button"
+              for="registration-pfp-input"
+            >
+              Ladda upp profilbild
+            </label>
+            <button
+              class="registration-pfp-overlay-button"
+              id="registration-pfp-clear-button"
+              type="button"
+              hidden
+            >
+              Ta bort
+            </button>
+          </div>
+
+          <div class="field">
+            <button id="registration-pfp-skip" type="button" hidden>
+              Hoppa över
+            </button>
+            <button id="registration-pfp-use" type="button" hidden>
+              Använd
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="registration-finish-page" hidden>
+        <img id="registration-finish-pfp" />
+        <p>
+          Välkommen till Skolspeedrun,
+          <span id="registration-finish-name">namn</span>
+        </p>
+
+        <p>Program: <span id="registration-finish-program">okänt</span></p>
+
+        <p>
+          Skanna ditt kort igen för att påbörja din första springtur. Lycka
+          till!
+        </p>
+      </div>
+    </div>
+
+    <!-- local scripts-->
+    <script src="helpers.js"></script>
+    <script src="dom.js"></script>
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

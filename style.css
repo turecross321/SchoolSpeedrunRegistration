@@ -1,0 +1,520 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  background: #f8f9fa;
+  color: #1a1a1a;
+  padding: 2rem 1rem;
+  margin: 0;
+  height: 100vh;
+}
+
+#registration {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Re-enable cursor for registration step 1 (basic info) and step 2 (profile picture) */
+#registrationBasicInfoPage,
+#registrationPfpPage,
+#registrationBasicInfoPage *,
+#registrationPfpPage * {
+  cursor: auto !important;
+}
+
+p {
+  margin: 0;
+}
+
+#nfcWarning {
+  background-color: #dc3545;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+*[hidden] {
+  display: none !important;
+}
+
+header,
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  color: #1a1a1a;
+}
+
+#scoresContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+}
+
+#topScoresSection {
+  flex: 1;
+  min-width: 0;
+}
+
+#runningRightNowSection {
+  flex: 0 0 auto;
+  min-width: 0;
+  width: 40%;
+}
+
+/* allow flex children to shrink and avoid overflowing the grid */
+#topScoresSection,
+#runningRightNowSection,
+.table-wrap {
+  min-width: 0;
+}
+
+/* ensure long text wraps instead of forcing horizontal scroll */
+td {
+  word-break: break-word;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: transparent;
+}
+
+.table-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 1.25rem;
+}
+
+.table-scroll {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 0;
+}
+
+.table-wrap > label {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+thead {
+  display: none;
+}
+
+/* Only use flexbox for single empty-placeholder rows */
+tbody:has(tr:only-child td.empty) {
+  display: flex;
+  flex-direction: column;
+}
+
+tbody:has(tr:only-child td.empty) tr:only-child {
+  flex: 1;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+  border: none;
+}
+
+/* Make empty cells in single rows fill available space */
+tbody tr:only-child td.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+th {
+  background-color: transparent;
+  font-weight: 600;
+  color: #666;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.table-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e9ecef;
+  flex: 0 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.table-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.table-program {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+.table-date {
+  font-size: 0.75rem;
+  color: #adb5bd;
+  margin-top: 0.25rem;
+}
+
+.table-stations {
+  font-size: 0.8rem;
+  color: #495057;
+  margin-top: 0.25rem;
+}
+
+.empty {
+  color: #6c757d;
+}
+
+.run-time {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.run-meta {
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Ensure leaderboard and running tables have two columns layout */
+/* Ensure cells align nicely and make final column right aligned */
+#topScoresSection table td,
+#runningRightNowSection table td {
+  vertical-align: middle;
+}
+
+#topScoresSection table td:last-child,
+#runningRightNowSection table td:last-child {
+  text-align: right;
+  padding-left: 1rem;
+}
+
+/* Prevent running right now data from wrapping */
+#runningRightNowSection table {
+  table-layout: auto;
+  width: 100%;
+}
+
+#runningRightNowSection table td {
+  white-space: nowrap;
+}
+
+#runningRightNowSection table td:first-child {
+  white-space: normal;
+}
+
+#runningRightNowSection .table-user {
+  white-space: normal;
+}
+
+/* ensure scroll area can shrink and table cells wrap safely */
+.table-scroll {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 0;
+}
+
+.table-wrap > label {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.run-time {
+  min-width: 5.5rem;
+}
+
+#registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.field input,
+.field select {
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: #0066ff;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+}
+
+button {
+  padding: 0.75rem 1rem;
+  background: #0066ff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+  font-size: 0.95rem;
+}
+
+button:hover {
+  background: #0052cc;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
+}
+
+button:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+}
+
+button[type="button"] {
+  background: #6c757d;
+}
+
+button[type="button"]:hover {
+  background: #5a6268;
+}
+
+/* NFC Dialog Styling */
+dialog {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  max-width: 500px;
+  min-height: 342.4px;
+  width: 90vw;
+  background: white;
+}
+
+/* Layout grid for main app area: top 70% (tables), bottom 30% (info) */
+#appGrid {
+  display: grid;
+  grid-template-rows: 70% 30%;
+  gap: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#infoPanel {
+  width: 100%;
+}
+
+.info-card {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+dialog > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+dialog p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+dialog img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+dialog h2 {
+  margin: 1rem 0 0.5rem;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+}
+
+dialog span {
+  color: #0066ff;
+  font-weight: 600;
+}
+
+/* ensure tables fill their column height */
+#scoresContainer {
+  align-items: stretch;
+}
+
+#registration-pfp-photo-container {
+  position: relative;
+  width: min(82vw, 22rem);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  border-radius: 999px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 35% 28%,
+      rgba(255, 255, 255, 0.35),
+      transparent 35%
+    ),
+    linear-gradient(180deg, #d2d5d9 0%, #a9adb4 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 12px 30px rgba(26, 26, 26, 0.14);
+}
+
+#registration-pfp-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.registration-pfp-overlay-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.25rem;
+  min-width: 12.5rem;
+  background: rgba(34, 34, 34, 0.45);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.registration-pfp-overlay-button:hover {
+  background: rgba(34, 34, 34, 0.58);
+}
+
+.registration-pfp-overlay-button:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
+#registration-pfp-clear-button {
+  background: rgba(34, 34, 34, 0.4);
+}
+
+#registration-pfp-clear-button:hover {
+  background: rgba(34, 34, 34, 0.55);
+}
+
+.emoji-button {
+  font-size: 2em;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+}
+
+.gap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Center content in the registration finished page like welcome back */
+#registration-finish-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+#registration-finish-pfp {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: block;
+  margin: 0 auto 0.5rem;
+}
