@@ -1,5 +1,5 @@
 ﻿# SchoolSpeedrunRegistration
-The registration page for SchoolSpeedrun.
+The registration page for SchoolSpeedrun. More information about the project can be found under the [SchoolSpeedrunStation repository](https://github.com/turecross321/SchoolSpeedrunStation).
 
 ## NOTE
 The code quality of this project is terrible. It was made with a very tight deadline and was initially not even meant to be its own project. It's a vibecoded stitched together mess.
